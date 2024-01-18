@@ -6,7 +6,6 @@ import "./global.css";
 
 const App = () => {
 	const [darkTheme, setDarkTheme] = useState(false);
-	console.log({ darkTheme });
 
 	return (
 		<div className={darkTheme ? "dark" : ""}>
