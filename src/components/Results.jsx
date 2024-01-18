@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useResultContext } from "../contexts/ResultContextProvider";
 
 const Results = () => {
-  return (
-    <div>Results</div>
-  )
-}
+	const { results, isLoading, getResults, searchTerm } = useResultContext();
+	useEffect(() => {}, []);
+	return <div>Results</div>;
+};
 
-export default Results
+export default Results;
