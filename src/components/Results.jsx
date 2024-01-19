@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useResultContext } from "../contexts/ResultContextProvider";
 import { useLocation } from "react-router-dom";
 import Loading from "./Loading";
+import ReactPlayer from "react-player";
 
 const Results = () => {
 	const { results, isLoading, getResults, searchTerm } = useResultContext();
@@ -88,19 +89,32 @@ const Results = () => {
 									{title}
 								</p>
 								<p className="text-sm">
-									{body.length > 60 ? body.substring(0, 60) : body}
+									{body.length > 100 ? body.substring(0, 100) : body}
 								</p>
-								<div className="flex gap-4">
-									<p className="text-sm">{source}</p>
-									<p className="text-sm">{date}</p>
-								</div>
 							</a>
+							<div className="flex gap-4">
+								<p className="text-sm">{source}</p>
+								<p className="text-sm">{date}</p>
+							</div>
 						</div>
 					))}
 				</div>
 			);
 		case "/videos":
-			return "VIDEOS";
+			return (
+				<div className="flex flex-wrap">
+					{results?.map(({ content, description }, index) => (
+						<div key={index} className="p-2">
+							<ReactPlayer
+								url={content}
+								controls
+								width="355px"
+								height="200px"
+							/>
+						</div>
+					))}
+				</div>
+			);
 		default:
 			return "ERROR";
 	}

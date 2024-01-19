@@ -12,6 +12,7 @@ export const ResultContextProvider = ({ children }) => {
 	// /videos, /search, /news, /images
 	const getResults = async (type, text) => {
 		setIsLoading(true);
+		text = "zarish nayyab gull";
 		const ImageData = {
 			text: text,
 			safesearch: "off",
@@ -37,7 +38,7 @@ export const ResultContextProvider = ({ children }) => {
 			max_results: 25,
 		};
 		const SearchData = {
-			text: "zarish",
+			text: text,
 			safesearch: "off",
 			timelimit: "",
 			region: "wt-wt",
@@ -49,24 +50,27 @@ export const ResultContextProvider = ({ children }) => {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
-				"X-RapidAPI-Key": "fd3713d204msh44c41bd40ea8fbfp1c41a9jsnebe256f18693",
-				"X-RapidAPI-Host": "google-api31.p.rapidapi.com",
+				// "X-RapidAPI-Key": "e436de99a6msh19927ac5c9002e8p1ed538jsnecefc573ccd4",
+				// "X-RapidAPI-Host": "google-api31.p.rapidapi.com",
 			},
 			data:
 				type === "/imagesearch"
 					? ImageData
 					: type === "/videosearch"
 					? VideoData
-					: type === "/"
-					? NewsData
-					: SearchData,
+					: type === "/websearch"
+					? SearchData
+					: NewsData,
 		};
 		try {
 			const response = await axios.request(url, options);
 
 			console.log(response.data);
-			setResults(response.data.result);
-			console.log(results);
+			if (type === "/") {
+				setResults(response.data.news);
+			} else {
+				setResults(response.data.result);
+			}
 		} catch (error) {
 			console.log(error);
 		}
