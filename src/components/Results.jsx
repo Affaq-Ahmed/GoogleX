@@ -62,9 +62,10 @@ const Results = () => {
 							rel="noreferrer"
 						>
 							<img
-								src={image?.src || thumbnail?.src}
+								src={image || thumbnail}
 								alt={title}
 								loading="lazy"
+								className="w-40 h-40"
 							/>
 							<p className="w-36 break-words text-sm mt-2">{title}</p>
 						</a>
