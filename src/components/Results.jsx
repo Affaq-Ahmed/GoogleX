@@ -10,7 +10,7 @@ const Results = () => {
 	console.log(location.pathname);
 
 	useEffect(() => {
-		if (!searchTerm) {
+		if (searchTerm) {
 			console.log("searchTerm: ", searchTerm);
 			const pathToEndpointMap = {
 				"/search": "/websearch",
@@ -22,7 +22,7 @@ const Results = () => {
 			const endpoint = pathToEndpointMap[location.pathname];
 
 			if (endpoint) {
-				getResults(endpoint, searchTerm);
+				getResults(endpoint);
 			}
 		}
 	}, [searchTerm, location.pathname]);

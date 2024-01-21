@@ -7,14 +7,14 @@ const baseUrl = "https://google-api31.p.rapidapi.com";
 export const ResultContextProvider = ({ children }) => {
 	const [results, setResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [searchTerm, setSearchTerm] = useState("");
+	const [searchTerm, setSearchTerm] = useState("Elon Musk");
 
 	// /videos, /search, /news, /images
-	const getResults = async (type, text) => {
+	const getResults = async (type) => {
+		console.log(type);
 		setIsLoading(true);
-		text = "zarish nayyab gull";
 		const ImageData = {
-			text: text,
+			text: searchTerm,
 			safesearch: "off",
 			region: "wt-wt",
 			color: "",
@@ -24,7 +24,7 @@ export const ResultContextProvider = ({ children }) => {
 			max_results: 100,
 		};
 		const VideoData = {
-			text: text,
+			text: searchTerm,
 			safesearch: "off",
 			timelimit: "",
 			duration: "",
@@ -33,12 +33,12 @@ export const ResultContextProvider = ({ children }) => {
 			max_results: 50,
 		};
 		const NewsData = {
-			text: text,
+			text: searchTerm,
 			region: "wt-wt",
 			max_results: 25,
 		};
 		const SearchData = {
-			text: text,
+			text: searchTerm,
 			safesearch: "off",
 			timelimit: "",
 			region: "wt-wt",
@@ -50,8 +50,8 @@ export const ResultContextProvider = ({ children }) => {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
-				// "X-RapidAPI-Key": "e436de99a6msh19927ac5c9002e8p1ed538jsnecefc573ccd4",
-				// "X-RapidAPI-Host": "google-api31.p.rapidapi.com",
+				"X-RapidAPI-Key": "e436de99a6msh19927ac5c9002e8p1ed538jsnecefc573ccd4",
+				"X-RapidAPI-Host": "google-api31.p.rapidapi.com",
 			},
 			data:
 				type === "/imagesearch"
